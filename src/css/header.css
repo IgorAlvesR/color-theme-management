@@ -1,0 +1,31 @@
+.header-main {
+  height: 3rem;
+  border-bottom: 1px solid #d1d5db;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.header-main h1 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+@media (max-width: 320px) {
+  /* Estilos para smartphones em modo retrato */
+  .header-main h1 {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Estilos para smartphones em modo paisagem */
+  .header-main h1 {
+    font-size: 0.8rem;
+  }
+}
