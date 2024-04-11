@@ -47,8 +47,14 @@ export class ThemeDOM {
     `;
   }
 
-  populateThemes(themes) {
-    const listTheme = document.querySelector(".list-theme");
+  mountThemeList(themes) {
+    this.#populateThemes(themes);
+    this.#handleSelectedTheme();
+    this.#handleRemoveTheme();
+  }
+
+  #populateThemes(themes) {
+    const listTheme = document.querySelector(".list-themes");
     listTheme.innerHTML = "";
     this.#themeService.saveSelected(null);
     const themesItem = [];
@@ -67,11 +73,9 @@ export class ThemeDOM {
     }
 
     listTheme.append(...themesItem);
-    this.handleSelectedTheme();
-    this.handleRemoveTheme();
   }
 
-  handleSelectedTheme() {
+  #handleSelectedTheme() {
     const cardsTheme = document.querySelectorAll(".card-theme");
     const service = this.#themeService;
     for (const cardTheme of cardsTheme) {
@@ -102,7 +106,7 @@ export class ThemeDOM {
     headerMain.style.color = "white";
   }
 
-  handleRemoveTheme() {
+  #handleRemoveTheme() {
     const iconsTrash = document.querySelectorAll(".card-theme .icon-trash");
 
     for (const icon of iconsTrash) {
@@ -118,7 +122,8 @@ export class ThemeDOM {
             const response = await this.#themeService.remove(themeId);
             if (response) {
               const themes = await this.#themeService.listAllThemes();
-              this.populateThemes(themes);
+              this.mountThemeList(themes);
+              this.handleFilterTheme(themes);
             }
           }
         } catch (error) {
@@ -126,5 +131,18 @@ export class ThemeDOM {
         }
       });
     }
+  }
+
+  async handleFilterTheme() {
+    const themes = await this.#themeService.listAllThemes();
+    const filterElement = document.querySelector(".filter-input-theme");
+
+    filterElement.addEventListener("input", (event) => {
+      const filterByThemeName = new RegExp(event.target.value, "i");
+      const themesFiltered = themes.filter((theme) =>
+        filterByThemeName.test(theme.name)
+      );
+      this.mountThemeList(themesFiltered);
+    });
   }
 }

@@ -1,0 +1,24 @@
+.container-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.container-main .filter-input-theme {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+}
+
+label[for="filter-input"] {
+  display: flex;
+  flex-direction: column;
+}
+
+label[for="filter-input"] span {
+  font-size: 10pt;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-left: 0.2rem;
+}

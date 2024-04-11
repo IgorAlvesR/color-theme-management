@@ -8,7 +8,8 @@ addEventListener("DOMContentLoaded", async () => {
   try {
     const themes = await service.listAllThemes();
     const themeDOM = new ThemeDOM(service);
-    themeDOM.populateThemes(themes);
+    themeDOM.mountThemeList(themes);
+    themeDOM.handleFilterTheme();
   } catch (error) {
     alert(error.message);
   }
