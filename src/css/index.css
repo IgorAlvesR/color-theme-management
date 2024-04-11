@@ -2,6 +2,7 @@
 @import "reset.css";
 @import "header.css";
 @import "list-theme.css";
+@import "icons.css";
 
 html {
   font-family: "Inter", sans-serif;

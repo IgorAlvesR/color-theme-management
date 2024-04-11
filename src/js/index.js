@@ -9,7 +9,6 @@ addEventListener("DOMContentLoaded", async () => {
     const themes = await service.listAllThemes();
     const themeDOM = new ThemeDOM(service);
     themeDOM.populateThemes(themes);
-    themeDOM.handleSelectedTheme();
   } catch (error) {
     alert(error.message);
   }

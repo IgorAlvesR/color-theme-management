@@ -7,7 +7,7 @@ export class ThemeService {
       const theme = await response.json();
       return theme;
     } catch (error) {
-      throw new Error("Ocorreu um erro ao buscar pelos temas.");
+      throw new Error("Ocorreu um erro ao buscar por este tema.");
     }
   }
 
@@ -21,7 +21,30 @@ export class ThemeService {
     }
   }
 
-  save(themeId) {
+  saveSelected(themeId) {
     localStorage.setItem("themeId", themeId);
+  }
+
+  getSelectedTheme() {
+    const themeId = localStorage.getItem("themeId");
+    return themeId;
+  }
+
+  async remove(themeId) {
+    const themeSelectedId = this.getSelectedTheme();
+    try {
+      if (themeSelectedId === themeId) {
+        throw new Error("Um tema selecionado não pode ser removido.");
+      }
+
+      const response = await fetch(`${BASE_URL}/themes/${themeId}`, {
+        method: "DELETE",
+      });
+      return response;
+    } catch (error) {
+      throw new Error(
+        `Ocorreu um erro ao tentar excluir tema. (${error.message})`
+      );
+    }
   }
 }

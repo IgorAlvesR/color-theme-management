@@ -7,7 +7,10 @@ export class ThemeDOM {
   #createListItem(theme) {
     return `
       <div data-id="${theme.id}" class="card-theme">
-        <header class="card-title">${theme.name}</header>
+        <header class="card-title">
+          ${theme.name}
+          <svg class="icon-trash" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.danger}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+        </header>
 
         <section class="card-theme-preview">
           <header style="background: ${theme.colors.primary}"></header>
@@ -46,14 +49,26 @@ export class ThemeDOM {
 
   populateThemes(themes) {
     const listTheme = document.querySelector(".list-theme");
+    listTheme.innerHTML = "";
+    this.#themeService.saveSelected(null);
     const themesItem = [];
+
+    if (!themes.length) {
+      const title = document.createElement("h1");
+      const emptyList = "Não existem temas registrados.";
+      title.innerHTML = listTheme.append(emptyList);
+      return;
+    }
 
     for (const theme of themes) {
       const li = document.createElement("li");
       li.innerHTML = this.#createListItem(theme);
       themesItem.push(li);
     }
+
     listTheme.append(...themesItem);
+    this.handleSelectedTheme();
+    this.handleRemoveTheme();
   }
 
   handleSelectedTheme() {
@@ -61,16 +76,16 @@ export class ThemeDOM {
     const service = this.#themeService;
     for (const cardTheme of cardsTheme) {
       cardTheme.addEventListener("click", async () => {
-        this.#removeCardSelected();
+        this.#removeZoomCardSelected();
         const id = cardTheme.getAttribute("data-id");
         const theme = await service.getThemeById(id);
         this.#applyTheme(theme);
-        this.#themeService.save(theme.id);
+        this.#themeService.saveSelected(theme.id);
       });
     }
   }
 
-  #removeCardSelected() {
+  #removeZoomCardSelected() {
     const cards = document.querySelectorAll(".card-selected");
     if (!cards.length) return;
     for (const card of cards) {
@@ -85,5 +100,31 @@ export class ThemeDOM {
     card.classList.add("card-selected");
     headerMain.style.background = primary;
     headerMain.style.color = "white";
+  }
+
+  handleRemoveTheme() {
+    const iconsTrash = document.querySelectorAll(".card-theme .icon-trash");
+
+    for (const icon of iconsTrash) {
+      icon.addEventListener("click", async (event) => {
+        event.stopImmediatePropagation();
+        const header = icon.parentElement;
+        const cardElement = header.parentElement;
+        const themeId = cardElement.getAttribute("data-id");
+
+        try {
+          const confirm = window.confirm("Confirma a exclusão deste tema ?");
+          if (confirm) {
+            const response = await this.#themeService.remove(themeId);
+            if (response) {
+              const themes = await this.#themeService.listAllThemes();
+              this.populateThemes(themes);
+            }
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      });
+    }
   }
 }

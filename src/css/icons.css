@@ -1,0 +1,11 @@
+.icon-trash {
+  width: 16px;
+  height: 16px;
+  transition: all .1s;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.icon-trash:hover {
+  background: #d1d5db;
+}
