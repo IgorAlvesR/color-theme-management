@@ -1,3 +1,5 @@
+import { Modal } from "./Modal.js";
+
 export class RegisterDOM {
   #themeService = null;
   constructor(themeService) {
@@ -117,7 +119,9 @@ export class RegisterDOM {
           alert("Tema salvo com sucesso.");
         }
       } catch (error) {
-        alert(error.message);
+        const errorDialog = new Modal("Erro!", error.message);
+        const confirm = await errorDialog.onConfirm();
+        if (confirm) errorDialog.close();
       } finally {
         this.#toggleLoading(false);
       }

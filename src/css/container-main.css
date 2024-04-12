@@ -4,3 +4,11 @@
   align-items: center;
   gap: 2rem;
 }
+
+.btn-add-theme {
+  transition: all .2s;
+}
+
+.btn-add-theme:hover {
+  opacity: 0.9;
+}

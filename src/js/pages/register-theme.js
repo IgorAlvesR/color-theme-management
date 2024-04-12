@@ -1,6 +1,7 @@
 import "../icons-config.js";
 import { RegisterDOM } from "../RegisterDOM.js";
 import { ThemeService } from "../services/ThemeService.js";
+import { Modal } from "../Modal.js";
 
 addEventListener("DOMContentLoaded", async () => {
   try {
@@ -18,6 +19,8 @@ addEventListener("DOMContentLoaded", async () => {
 
     register.handleSubmitRegister(themeId);
   } catch (error) {
-    alert(error.message);
+    const errorDialog = new Modal("Erro!", error.message);
+    const confirm = await errorDialog.onConfirm();
+    if (confirm) errorDialog.close();
   }
 });

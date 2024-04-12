@@ -1,6 +1,7 @@
 import "../icons-config.js";
 import { ThemeService } from "../services/ThemeService.js";
 import { ThemeDOM } from "../ThemeDOM.js";
+import { Modal } from "../Modal.js";
 
 addEventListener("DOMContentLoaded", async () => {
   try {
@@ -10,6 +11,8 @@ addEventListener("DOMContentLoaded", async () => {
     themeDOM.mountThemeList(themes);
     themeDOM.handleFilterTheme();
   } catch (error) {
-    alert(error.message);
+    const errorDialog = new Modal("Erro!", error.message);
+    const confirm = await errorDialog.onConfirm();
+    if (confirm) errorDialog.close();
   }
 });

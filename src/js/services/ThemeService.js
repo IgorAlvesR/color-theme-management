@@ -41,7 +41,7 @@ export class ThemeService {
       });
       return response;
     } catch (error) {
-      throw new Error("Ocorreu um erro ao buscar pelos temas.");
+      throw new Error("Ocorreu um erro ao salvar este tema.");
     }
   }
 
@@ -56,7 +56,7 @@ export class ThemeService {
       });
       return response;
     } catch (error) {
-      throw new Error("Ocorreu um erro ao buscar pelos temas.");
+      throw new Error("Ocorreu um erro ao atualizar este tema.");
     }
   }
 

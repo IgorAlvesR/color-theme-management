@@ -9,6 +9,27 @@
 </head>
 
 <body>
+  <dialog>
+    <section>
+      <header>
+        <span class="dialog-title">Titulo</span>
+        <svg class="close-btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </header>
+
+      <main class="content-dialog">
+        Conteúdo
+      </main>
+
+      <footer class="dialog-footer">
+        <button class="btn">Ok</button>
+      </footer>
+    </section>
+  </dialog>
+
   <header class="header-main">
     <h1>
       Gerenciamento e seleção de temas
@@ -18,12 +39,13 @@
 
   <main class="register-theme">
     <form id="form-theme-register" class="form-theme-register">
-      <a class="btn btn-secondary" href="./index.html">Ir para Home</a>
+      <a class="link" href="./index.html">Ir para Home</a>
       <h1 class="title">Registre seu tema</h1>
 
       <label for="name">
         <span>Nome</span>
-        <input tabindex="0" id="name" class="input input-register-name" type="text" autofocus>
+        <input tabindex="0" id="name" class="input input-register-name" placeholder="Ex: Tema Azul" type="text"
+          autofocus>
         <span class="error"></span>
       </label>
 
