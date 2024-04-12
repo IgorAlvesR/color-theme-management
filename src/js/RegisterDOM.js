@@ -116,6 +116,9 @@ export class RegisterDOM {
             window.location.href = "../pages/index.html";
           }
           this.#clearFields();
+          this.#initialConfigPreview({
+            colors: { primary: "#000000", secondary: "#000000" },
+          });
           alert("Tema salvo com sucesso.");
         }
       } catch (error) {
