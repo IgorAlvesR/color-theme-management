@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/index.css">
+  <title>Registro de tema</title>
+</head>
+
+<body>
+  <header class="header-main">
+    <h1>
+      Gerenciamento e seleção de temas
+      <i data-lucide="palette"></i>
+    </h1>
+  </header>
+
+  <main class="register-theme">
+    <form id="form-theme-register" class="form-theme-register">
+      <button class="btn btn-secondary"><a href="./index.html">Ir para Home</a></button>
+      <h1 class="title">Registre um novo tema</h1>
+
+      <label for="name">
+        <span>Nome</span>
+        <input tabindex="0" id="name" class="input input-register-name" type="text" autofocus>
+        <span class="error"></span>
+      </label>
+
+      <section class="group-field-color">
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Primary</label>
+        </div>
+
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Secondary</label>
+        </div>
+
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Success</label>
+        </div>
+
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Danger</label>
+        </div>
+
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Warning</label>
+        </div>
+      </section>
+
+      <button type="submit" form="form-theme-register" class="btn btn-register-theme">Salvar</button>
+
+    </form>
+
+    <aside aria-label="Preview para visualizar as cores sendo aplicadas no tema." class="preview-register">
+      <header>Preview</header>
+      <section>
+        <button class="btn btn-preview-register">Novo tema</button>
+        <main>
+          <div class="preview-register-card"></div>
+          <div class="preview-register-card"></div>
+          <div class="preview-register-card"></div>
+          <div class="preview-register-card"></div>
+        </main>
+      </section>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script type="module" src="../js/pages/register-theme.js"></script>
+</body>
+
+</html>

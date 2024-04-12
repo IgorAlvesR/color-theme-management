@@ -4,6 +4,8 @@
 @import "list-themes.css";
 @import "icons.css";
 @import "container-main.css";
+@import "register-theme.css";
+@import "utils.css";
 
 html {
   font-family: "Inter", sans-serif;

@@ -1,10 +1,11 @@
 .header-main {
   height: 3rem;
-  border-bottom: 1px solid #d1d5db;
+  border-bottom: 1px solid #f5f4f4;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 3rem;
+  background-color: #fbfbfb;
 }
 
 .header-main h1 {
@@ -17,14 +18,12 @@
 }
 
 @media (max-width: 320px) {
-  /* Estilos para smartphones em modo retrato */
   .header-main h1 {
     font-size: 0.7rem;
   }
 }
 
 @media (max-width: 480px) {
-  /* Estilos para smartphones em modo paisagem */
   .header-main h1 {
     font-size: 0.8rem;
   }

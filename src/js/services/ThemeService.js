@@ -1,4 +1,4 @@
-import { BASE_URL } from "./config.js";
+import { BASE_URL } from "../config.js";
 
 export class ThemeService {
   async getThemeById(id) {
@@ -28,6 +28,21 @@ export class ThemeService {
   getSelectedTheme() {
     const themeId = localStorage.getItem("themeId");
     return themeId;
+  }
+
+  async register(theme) {
+    try {
+      const response = await fetch(`${BASE_URL}/themes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(theme),
+      });
+      return response;
+    } catch (error) {
+      throw new Error("Ocorreu um erro ao buscar pelos temas.");
+    }
   }
 
   async remove(themeId) {

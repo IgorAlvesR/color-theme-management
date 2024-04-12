@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/src/css/index.css">
+  <link rel="stylesheet" href="../css/index.css">
   <title>Gerenciamento de temas</title>
 </head>
 
@@ -19,16 +19,19 @@
   <main class="container-main">
     <label for="filter-input">
       <span>Filtrar</span>
-      <input id="filter-input" placeholder="ex: Tema Azul" class="filter-input-theme" type="text" />
+      <input id="filter-input" placeholder="ex: Tema Azul" class="input filter-input-theme" type="text" />
     </label>
 
     <section class="container-list-themes">
-      <ul class="list-themes"></ul>
+      <button class="btn btn-add-theme">Novo tema</button>
+      <ul class="list-themes">
+        Não há temas disponíveis no momento!
+      </ul>
     </section>
   </main>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script type="module" src="/src/js/index.js"></script>
+  <script type="module" src="../js/pages/home.js"></script>
 </body>
 
 </html>

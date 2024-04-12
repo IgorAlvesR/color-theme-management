@@ -51,6 +51,7 @@ export class ThemeDOM {
     this.#populateThemes(themes);
     this.#handleSelectedTheme();
     this.#handleRemoveTheme();
+    this.#handleRegisterTheme();
   }
 
   #populateThemes(themes) {
@@ -100,10 +101,12 @@ export class ThemeDOM {
   #applyTheme(theme) {
     const headerMain = document.querySelector(".header-main");
     const card = document.querySelector(`[data-id="${theme.id}"]`);
-    const primary = theme.colors.primary;
+    const buttonAddTheme = document.querySelector(".btn-add-theme");
+
     card.classList.add("card-selected");
-    headerMain.style.background = primary;
+    headerMain.style.background = theme.colors.primary;
     headerMain.style.color = "white";
+    buttonAddTheme.style.background = theme.colors.secondary;
   }
 
   #handleRemoveTheme() {
@@ -131,6 +134,13 @@ export class ThemeDOM {
         }
       });
     }
+  }
+
+  #handleRegisterTheme() {
+    const btnRegister = document.querySelector(".btn-add-theme");
+    btnRegister.addEventListener("click", () => {
+      window.location.href = "../pages/register-theme.html";
+    });
   }
 
   async handleFilterTheme() {
