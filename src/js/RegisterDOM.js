@@ -4,7 +4,80 @@ export class RegisterDOM {
     this.#themeService = themeService;
   }
 
-  handleSubmitRegister() {
+  #clearFields() {
+    const formRegister = this.#getFormElement();
+
+    const [name, primary, secondary, success, danger, warning] =
+      formRegister.querySelectorAll("input");
+
+    name.value = "";
+    primary.value = "#000000";
+    secondary.value = "#000000";
+    success.value = "#000000";
+    danger.value = "#000000";
+    warning.value = "#000000";
+  }
+
+  #initialConfigPreview(theme) {
+    const previewRegisterHeader = document.querySelector(
+      ".preview-register header"
+    );
+    const previewButtonRegister = document.querySelector(
+      ".btn-preview-register"
+    );
+
+    previewRegisterHeader.style.background = theme.colors.primary;
+    previewButtonRegister.style.background = theme.colors.secondary;
+  }
+
+  populateFields(theme) {
+    const formRegister = this.#getFormElement();
+    const title = formRegister.querySelector(".title");
+    const [name, primary, secondary, success, danger, warning] =
+      formRegister.querySelectorAll("input");
+
+    title.textContent = "Edite seu tema";
+    name.value = theme.name;
+    primary.value = theme.colors.primary;
+    secondary.value = theme.colors.secondary;
+    success.value = theme.colors.success;
+    danger.value = theme.colors.danger;
+    warning.value = theme.colors.warning;
+
+    this.#initialConfigPreview(theme);
+  }
+
+  async #saveTheme(theme) {
+    if (!!theme.id) {
+      const response = await this.#themeService.update({
+        id: theme.id,
+        name: theme.name,
+        colors: {
+          primary: theme.colors.primary,
+          secondary: theme.colors.secondary,
+          success: theme.colors.success,
+          danger: theme.colors.danger,
+          warning: theme.colors.warning,
+        },
+      });
+      return response;
+    }
+
+    const response = await this.#themeService.register({
+      name: theme.name,
+      colors: {
+        primary: theme.colors.primary,
+        secondary: theme.colors.secondary,
+        success: theme.colors.success,
+        danger: theme.colors.danger,
+        warning: theme.colors.warning,
+      },
+    });
+
+    return response;
+  }
+
+  handleSubmitRegister(themeId) {
     const formRegister = this.#getFormElement();
     const btnRegister = document.querySelector(".btn-register-theme");
     this.#configPreview(formRegister);
@@ -20,7 +93,9 @@ export class RegisterDOM {
 
       try {
         this.#toggleLoading(true);
-        const response = await this.#themeService.register({
+
+        const theme = {
+          id: themeId,
           name: name.value,
           colors: {
             primary: primary.value,
@@ -29,10 +104,17 @@ export class RegisterDOM {
             danger: danger.value,
             warning: warning.value,
           },
-        });
+        };
+
+        const isEdit = !!theme.id;
+        const response = await this.#saveTheme(theme);
 
         if (response.ok) {
-          alert("Tema salvo com sucesso!");
+          if (isEdit) {
+            window.location.href = "../pages/index.html";
+          }
+          this.#clearFields();
+          alert("Tema salvo com sucesso.");
         }
       } catch (error) {
         alert(error.message);

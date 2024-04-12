@@ -45,6 +45,21 @@ export class ThemeService {
     }
   }
 
+  async update(theme) {
+    try {
+      const response = await fetch(`${BASE_URL}/themes/${theme.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(theme),
+      });
+      return response;
+    } catch (error) {
+      throw new Error("Ocorreu um erro ao buscar pelos temas.");
+    }
+  }
+
   async remove(themeId) {
     const themeSelectedId = this.getSelectedTheme();
     try {

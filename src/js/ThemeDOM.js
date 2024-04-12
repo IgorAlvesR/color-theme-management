@@ -4,12 +4,15 @@ export class ThemeDOM {
     this.#themeService = themeService;
   }
 
-  #createListItem(theme) {
+  #createCard(theme) {
     return `
       <div data-id="${theme.id}" class="card-theme">
         <header class="card-title">
           ${theme.name}
-          <svg class="icon-trash" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.danger}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          <div class="icons-card">
+          <svg class="icon icon-edit" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.secondary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/></svg>
+            <svg class="icon icon-trash" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.danger}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          </div>
         </header>
 
         <section class="card-theme-preview">
@@ -52,6 +55,7 @@ export class ThemeDOM {
     this.#handleSelectedTheme();
     this.#handleRemoveTheme();
     this.#handleRegisterTheme();
+    this.#handleEditTheme();
   }
 
   #populateThemes(themes) {
@@ -69,7 +73,7 @@ export class ThemeDOM {
 
     for (const theme of themes) {
       const li = document.createElement("li");
-      li.innerHTML = this.#createListItem(theme);
+      li.innerHTML = this.#createCard(theme);
       themesItem.push(li);
     }
 
@@ -116,7 +120,8 @@ export class ThemeDOM {
       icon.addEventListener("click", async (event) => {
         event.stopImmediatePropagation();
         const header = icon.parentElement;
-        const cardElement = header.parentElement;
+        const containerIcons = header.parentElement;
+        const cardElement = containerIcons.parentElement;
         const themeId = cardElement.getAttribute("data-id");
 
         try {
@@ -132,6 +137,21 @@ export class ThemeDOM {
         } catch (error) {
           alert(error.message);
         }
+      });
+    }
+  }
+
+  #handleEditTheme() {
+    const iconsEdit = document.querySelectorAll(".card-theme .icon-edit");
+
+    for (const icon of iconsEdit) {
+      icon.addEventListener("click", async (event) => {
+        event.stopImmediatePropagation();
+        const header = icon.parentElement;
+        const containerIcons = header.parentElement;
+        const cardElement = containerIcons.parentElement;
+        const themeId = cardElement.getAttribute("data-id");
+        window.location.href = `../pages/register-theme.html?themeId=${themeId}`;
       });
     }
   }
