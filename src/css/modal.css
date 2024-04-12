@@ -1,0 +1,64 @@
+dialog::backdrop {
+  background-color: rgb(0 0 0/0.5);
+}
+
+dialog {
+  max-width: 500px;
+  width: 100%;
+  border-radius: .5rem;
+  border: none;
+}
+
+dialog section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+dialog header .dialog-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+dialog:focus-visible {
+  outline: none;
+}
+
+dialog header .close-btn {
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all .1s;
+}
+
+dialog header .close-btn:hover {
+  background-color: #d1d5db;
+  border-radius: .5rem;
+}
+
+dialog .dialog-footer {
+  display: flex;
+  justify-content: end;
+  border-top: 1px solid #f5f4f4;
+  padding: 0.5rem 0;
+}
+
+dialog .dialog-footer button {
+  min-width: 8rem;
+}
+
+dialog .content-dialog {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  dialog .dialog-footer {
+    justify-content: center;
+  }
+}

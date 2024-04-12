@@ -6,6 +6,7 @@
 @import "container-main.css";
 @import "register-theme.css";
 @import "utils.css";
+@import "modal.css";
 
 html {
   font-family: "Inter", sans-serif;

@@ -1,7 +1,29 @@
+import { Modal } from "./Modal.js";
 export class ThemeDOM {
   #themeService = null;
   constructor(themeService) {
     this.#themeService = themeService;
+  }
+
+  mountThemeList(themes) {
+    this.#populateThemes(themes);
+    this.#handleSelectedTheme();
+    this.#handleRemoveTheme();
+    this.#handleRegisterTheme();
+    this.#handleEditTheme();
+  }
+
+  async handleFilterTheme() {
+    const themes = await this.#themeService.listAllThemes();
+    const filterElement = document.querySelector(".filter-input-theme");
+
+    filterElement.addEventListener("input", (event) => {
+      const filterByThemeName = new RegExp(event.target.value, "i");
+      const themesFiltered = themes.filter((theme) =>
+        filterByThemeName.test(theme.name)
+      );
+      this.mountThemeList(themesFiltered);
+    });
   }
 
   #createCard(theme) {
@@ -48,14 +70,6 @@ export class ThemeDOM {
         </footer>
       </div>
     `;
-  }
-
-  mountThemeList(themes) {
-    this.#populateThemes(themes);
-    this.#handleSelectedTheme();
-    this.#handleRemoveTheme();
-    this.#handleRegisterTheme();
-    this.#handleEditTheme();
   }
 
   #populateThemes(themes) {
@@ -124,18 +138,27 @@ export class ThemeDOM {
         const cardElement = containerIcons.parentElement;
         const themeId = cardElement.getAttribute("data-id");
 
+        const modalConfirm = new Modal(
+          "Remover",
+          "Confirma remoção desse tema ?",
+          "Confirmar"
+        );
+
+        const confirm = await modalConfirm.onConfirm();
+
         try {
-          const confirm = window.confirm("Confirma a exclusão deste tema ?");
-          if (confirm) {
-            const response = await this.#themeService.remove(themeId);
-            if (response) {
-              const themes = await this.#themeService.listAllThemes();
-              this.mountThemeList(themes);
-              this.handleFilterTheme(themes);
-            }
+          if (!confirm) return;
+          const response = await this.#themeService.remove(themeId);
+          if (response) {
+            const themes = await this.#themeService.listAllThemes();
+            this.mountThemeList(themes);
+            this.handleFilterTheme(themes);
           }
+          modalConfirm.close();
         } catch (error) {
-          alert(error.message);
+          const errorDialog = new Modal("Erro!", error.message);
+          const confirm = await errorDialog.onConfirm();
+          if (confirm) errorDialog.close();
         }
       });
     }
@@ -160,19 +183,6 @@ export class ThemeDOM {
     const btnRegister = document.querySelector(".btn-add-theme");
     btnRegister.addEventListener("click", () => {
       window.location.href = "../pages/register-theme.html";
-    });
-  }
-
-  async handleFilterTheme() {
-    const themes = await this.#themeService.listAllThemes();
-    const filterElement = document.querySelector(".filter-input-theme");
-
-    filterElement.addEventListener("input", (event) => {
-      const filterByThemeName = new RegExp(event.target.value, "i");
-      const themesFiltered = themes.filter((theme) =>
-        filterByThemeName.test(theme.name)
-      );
-      this.mountThemeList(themesFiltered);
     });
   }
 }
