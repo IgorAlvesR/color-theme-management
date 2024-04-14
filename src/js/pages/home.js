@@ -4,10 +4,11 @@ import { ThemeDOM } from "../ThemeDOM.js";
 import { Modal } from "../Modal.js";
 
 addEventListener("DOMContentLoaded", async () => {
+  const service = new ThemeService();
+  const themeDOM = new ThemeDOM(service);
+  themeDOM.handleRegisterTheme();
   try {
-    const service = new ThemeService();
     const themes = await service.listAllThemes();
-    const themeDOM = new ThemeDOM(service);
     themeDOM.mountThemeList(themes);
     themeDOM.handleFilterTheme();
   } catch (error) {

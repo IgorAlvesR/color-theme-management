@@ -9,7 +9,6 @@ export class ThemeDOM {
     this.#populateThemes(themes);
     this.#handleSelectedTheme();
     this.#handleRemoveTheme();
-    this.#handleRegisterTheme();
     this.#handleEditTheme();
   }
 
@@ -180,7 +179,7 @@ export class ThemeDOM {
     }
   }
 
-  #handleRegisterTheme() {
+  handleRegisterTheme() {
     const btnRegister = document.querySelector(".btn-add-theme");
     btnRegister.addEventListener("click", () => {
       window.location.assign("../pages/register-theme.html");
