@@ -101,6 +101,12 @@
   gap: 2rem;
 }
 
+@media (max-width: 375px) {
+  .register-theme {
+    padding: 10px;
+  }
+}
+
 @media (max-width: 768px) {
   .register-theme {
     flex-direction: column;

@@ -61,4 +61,8 @@ dialog .content-dialog {
   dialog .dialog-footer {
     justify-content: center;
   }
+
+  dialog {
+    max-width: 80%;
+  }
 }
