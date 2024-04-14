@@ -28,12 +28,12 @@ export class ThemeDOM {
 
   #createCard(theme) {
     return `
-      <div data-id="${theme.id}" class="card-theme">
+      <div data-id="${theme.id}" data-testid="card-theme" class="card-theme">
         <header class="card-title">
           ${theme.name}
           <div class="icons-card">
             <svg class="icon icon-edit" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.secondary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/></svg>
-            <svg class="icon icon-trash" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.danger}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            <svg data-testid="btn-remove" class="icon icon-trash" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.danger}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
           </div>
         </header>
 
@@ -173,7 +173,9 @@ export class ThemeDOM {
         const containerIcons = header.parentElement;
         const cardElement = containerIcons.parentElement;
         const themeId = cardElement.getAttribute("data-id");
-        window.location.href = `../pages/register-theme.html?themeId=${themeId}`;
+        window.location.assign(
+          `../pages/register-theme.html?themeId=${themeId}`
+        );
       });
     }
   }
@@ -181,7 +183,7 @@ export class ThemeDOM {
   #handleRegisterTheme() {
     const btnRegister = document.querySelector(".btn-add-theme");
     btnRegister.addEventListener("click", () => {
-      window.location.href = "../pages/register-theme.html";
+      window.location.assign("../pages/register-theme.html");
     });
   }
 }

@@ -113,7 +113,7 @@ export class RegisterDOM {
 
         if (response.ok) {
           if (isEdit) {
-            window.location.href = "../pages/index.html";
+            window.location.assign("../pages/index.html");
           }
           this.#clearFields();
           this.#initialConfigPreview({
