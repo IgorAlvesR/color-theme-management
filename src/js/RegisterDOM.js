@@ -119,7 +119,7 @@ export class RegisterDOM {
           this.#initialConfigPreview({
             colors: { primary: "#000000", secondary: "#000000" },
           });
-          alert("Tema salvo com sucesso.");
+          window.alert("Tema salvo com sucesso.");
         }
       } catch (error) {
         const errorDialog = new Modal("Erro!", error.message);

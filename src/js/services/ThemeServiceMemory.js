@@ -33,9 +33,13 @@ export class ThemeServiceMemory {
     return 1;
   }
 
-  register(theme) {}
+  register(theme) {
+    return { ok: true };
+  }
 
-  update(theme) {}
+  update(theme) {
+    return { ok: true };
+  }
 
   remove(themeId) {}
 }

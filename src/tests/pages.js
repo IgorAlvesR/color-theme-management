@@ -1,0 +1,163 @@
+export const registerPage = `
+  <!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/index.css">
+  <title>Registro de tema</title>
+</head>
+
+<body>
+  <dialog data-testid="dialog">
+    <section>
+      <header>
+        <span class="dialog-title">Titulo</span>
+        <svg class="close-btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </header>
+
+      <main class="content-dialog">
+        Conteúdo
+      </main>
+
+      <footer class="dialog-footer">
+        <button class="btn">Ok</button>
+      </footer>
+    </section>
+  </dialog>
+
+  <header class="header-main">
+    <h1>
+      Gerenciamento e seleção de temas
+      <i data-lucide="palette"></i>
+    </h1>
+  </header>
+
+  <main class="register-theme">
+    <form data-testid="form-register" id="form-theme-register" class="form-theme-register">
+      <a class="link" href="./index.html">Ir para Home</a>
+      <h1 class="title">Registre seu tema</h1>
+
+      <label for="name">
+        <span>Nome</span>
+        <input data-testid="input-theme-name" tabindex="0" id="name" class="input input-register-name" placeholder="Ex: Tema Azul" type="text"
+          autofocus>
+        <span class="error"></span>
+      </label>
+
+      <section class="group-field-color">
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Primary</label>
+        </div>
+
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Secondary</label>
+        </div>
+
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Success</label>
+        </div>
+
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Danger</label>
+        </div>
+
+        <div class="field-color">
+          <input type="color" value="#000000" />
+          <label>Warning</label>
+        </div>
+      </section>
+
+      <button type="submit" form="form-theme-register" class="btn btn-register-theme">Salvar</button>
+
+    </form>
+
+    <aside aria-label="Preview para visualizar as cores sendo aplicadas no tema." class="preview-register">
+      <header>Preview</header>
+      <section>
+        <button class="btn btn-preview-register">Novo tema</button>
+        <main>
+          <div class="preview-register-card"></div>
+          <div class="preview-register-card"></div>
+          <div class="preview-register-card"></div>
+          <div class="preview-register-card"></div>
+        </main>
+      </section>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script type="module" src="../js/pages/register-theme.js"></script>
+</body>
+
+</html>
+  `;
+
+export const homePage = `
+    <!DOCTYPE html>
+      <html lang="pt-BR">
+
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/index.css">
+        <title>Gerenciamento de temas</title>
+      </head>
+
+      <body>
+        <dialog data-testid="dialog">
+          <section>
+            <header>
+              <span class="dialog-title">Titulo</span>
+              <svg class="close-btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </header>
+
+            <main class="content-dialog">
+              Conteúdo
+            </main>
+
+            <footer class="dialog-footer">
+              <button class="btn">Ok</button>
+            </footer>
+          </section>
+        </dialog>
+
+        <header data-testid="header-test" class="header-main">
+          <h1>
+            Gerenciamento e seleção de temas
+            <i data-lucide="palette"></i>
+          </h1>
+        </header>
+
+        <main class="container-main">
+          <label for="filter-input">
+            <span>Filtrar</span>
+            <input id="filter-input" placeholder="ex: Tema Azul" class="input filter-input-theme" type="text" />
+          </label>
+
+          <section class="container-list-themes">
+            <button data-testid="btn-register-theme" class="btn btn-add-theme">Novo tema</button>
+            <ul class="list-themes">
+              Não há temas disponíveis no momento!
+            </ul>
+          </section>
+        </main>
+
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+        <script type="module" src="../js/pages/home.js"></script>
+      </body>
+    </html>
+  `;

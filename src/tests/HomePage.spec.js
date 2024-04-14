@@ -1,76 +1,15 @@
-import { test, expect, describe, beforeEach, vi } from "vitest";
-import { ThemeDOM } from "../js/ThemeDOM.js";
-import { ThemeServiceMemory } from "../js/services/ThemeServiceMemory.js";
 import { fireEvent, getByTestId, getByText } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
+import { beforeEach, describe, expect, test, vi } from "vitest";
+import { ThemeDOM } from "../js/ThemeDOM.js";
+import { ThemeServiceMemory } from "../js/services/ThemeServiceMemory.js";
+import { homePage } from "./pages.js";
 
 const { JSDOM } = require("jsdom");
 
-function mountDOM() {
-  return `
-    <!DOCTYPE html>
-      <html lang="pt-BR">
-
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/index.css">
-        <title>Gerenciamento de temas</title>
-      </head>
-
-      <body>
-        <dialog data-testid="dialog">
-          <section>
-            <header>
-              <span class="dialog-title">Titulo</span>
-              <svg class="close-btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            </header>
-
-            <main class="content-dialog">
-              Conteúdo
-            </main>
-
-            <footer class="dialog-footer">
-              <button class="btn">Ok</button>
-            </footer>
-          </section>
-        </dialog>
-
-        <header data-testid="header-test" class="header-main">
-          <h1>
-            Gerenciamento e seleção de temas
-            <i data-lucide="palette"></i>
-          </h1>
-        </header>
-
-        <main class="container-main">
-          <label for="filter-input">
-            <span>Filtrar</span>
-            <input id="filter-input" placeholder="ex: Tema Azul" class="input filter-input-theme" type="text" />
-          </label>
-
-          <section class="container-list-themes">
-            <button data-testid="btn-register-theme" class="btn btn-add-theme">Novo tema</button>
-            <ul class="list-themes">
-              Não há temas disponíveis no momento!
-            </ul>
-          </section>
-        </main>
-
-        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-        <script type="module" src="../js/pages/home.js"></script>
-      </body>
-    </html>
-  `;
-}
-
 describe("Página home", () => {
   beforeEach(() => {
-    const { window } = new JSDOM(mountDOM(), {
+    const { window } = new JSDOM(homePage, {
       url: "http://127.0.0.1:5500/src/pages/index.html",
     });
     global.document = window.document;
